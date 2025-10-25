@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState } = React;
+        
+        function TableRow({ number, index }) {
+            return (
+                <div className="py-1">
+                    {number} × {index} = {number * index}
+                </div>
+            );
+        }
+        
+        function Table({ FIRSTNum }) {
+            const [Num, secondNum] = useState(FIRSTNum);
+            
+            function nextTable() {
+    
+        
+                secondNum(prevNum => (prevNum % 1000000) + 1);
+            }
+            
+            return (
+                <div className="bg-white  p-6">
+                    <button 
+                        onClick={nextTable} 
+                        className= "px-4 py-2 border-2 rounded-lg bg-indigo-700 text-white  bg-indigo-700"
+                    >
+                        Next
+                    </button>
+                    <div className=" space-y-2">
+                        <TableRow number={Num} index={1} />
+                        <TableRow number={Num} index={2} />
+                        <TableRow number={Num} index={3} />
+                        <TableRow number={Num} index={4} />
+                    </div>
+                </div>
+            );
+        }
+        
+        function App() {
+            return (
+                <div className=" flex  p-4">
+                    <div className="  flex gap-8 ">
+                        <Table FIRSTNum={2} />
+                        <Table FIRSTNum={2} />
+                    </div>
+                </div>
+            );
+        }
+        
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
